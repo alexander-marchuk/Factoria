@@ -521,9 +521,11 @@ else // нет дерева
                         new Dir("http://fogid.net/o/info-source",
                             new Rec(null, null,
                                 new Tex("http://fogid.net/o/name"))),
-                        new Str("http://fogid.net/o/from-date"))
-                        { SortField = "http://fogid.net/o/from-date" })
-                    { Label = "Источник поступления" },
+                        new Tex("http://fogid.net/o/description"),
+                        new Dir("http://fogid.net/o/in-archive",
+                            new Rec(null, null,
+                                new Tex("http://fogid.net/o/name")))))
+                { Label = "Источник поступления в архив" },
                 InvIndoc("Отраженные персонажи"),
                 new Inv("http://fogid.net/o/adoc",
                     new Rec(null, "http://fogid.net/o/authority",

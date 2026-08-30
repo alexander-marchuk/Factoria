@@ -70,7 +70,7 @@ app.MapGet("~/audio", (HttpRequest request, Factograph.Data.IFDataService db) =>
     {
         return Results.Empty;
     }
-    return Results.File(path + ".mp3", "video/mp3");
+    return Results.File(path + ".mp3", "audio/mp3");
 });
 app.MapGet("~/doc", (HttpRequest request, Factograph.Data.IFDataService db) =>
 {

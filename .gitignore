@@ -14,12 +14,14 @@ bin
 obj
 .vs
 
+
 /SypBlazor/appsettings.json
 /SypBlazor/wwwroot/logfile_put.txt
 /SypBlazor/wwwroot/config.xml
 /SypBlazor/wwwroot/Users.xml
 
 
+/ConsoleTest/wwwroot/config.xml
 /Tres/wwwroot/config.xml
 /Uno/wwwroot/config.xml
 /OpenA/wwwroot/config.xml

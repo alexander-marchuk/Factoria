@@ -17,7 +17,41 @@ partial class Program
     public static void Main()
     {
         Console.WriteLine("Main выделенный");
-        Main10();
+        Main11();
+    }
+    public static void Main11()
+    {
+        Console.WriteLine("Start FactographData analytics");
+        string wwwpath = "../../../wwwroot/"; // Это для запуска через dotnet
+        Factograph.Data.IFDataService db = new Factograph.Data.FDataService(wwwpath, wwwpath + "Ontology.xml", wwwpath + "zaliznyak_shortform.zip");
+        db.Reload(); // Это действие необходимо если меняется набор кассет
+
+        //var query = db.SearchRRecords("марчук честь дяди", true).ToArray();
+        //var qu2 = db.SearchWordsWCR("марчук честь дяди").ToArray();
+        //var qu3 = db.SearchWordsWCR("реке марчук").ToArray();
+        var qu4 = db.GetAll();
+        int n_ams = 0;
+        foreach (var xel in qu4.Where(x => x.Attribute("type")?.Value == "http://fogid.net/o/archive-member"))
+        {
+            if (xel.Name != "record") throw new Exception("ERROR: no record");
+            n_ams++;
+            string? infosource = null;
+            string? archiveitem = null;
+            string? description = null;
+            foreach (var field in xel.Elements()) 
+            {
+                string? prop = field.Attribute("prop")?.Value;
+                if (field.Name == "direct" && prop == "http://fogid.net/o/info-source") infosource = field.Element("record")?.Attribute("id")?.Value;
+                else if (field.Name == "direct" && prop == "http://fogid.net/o/archive-item") archiveitem = field.Element("record")?.Attribute("id")?.Value;
+                else if (field.Name == "field" && prop == "http://fogid.net/o/description") description = field.Value;
+
+                if (infosource == null || archiveitem == null)
+                {
+                    Console.WriteLine($"{xel.ToString()}");
+                }
+            }
+        }
+        Console.WriteLine($"Total: {n_ams} archive_member records");
     }
     public static void Main10()
     {

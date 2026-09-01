@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <config>
   <database connectionstring="rr:C:\Home\FactographDatabases\rr-test2\"/>
-  <LoadCassette>C:\Home\FactographProjects\bbb_cass</LoadCassette>
+  <LoadCassette>C:\Home\FactographProjects\aaa_cass</LoadCassette>
 </config>

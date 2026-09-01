@@ -15,4 +15,10 @@
     <ProjectReference Include="..\Factograph.Data\Factograph.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Polar.DB">
+      <HintPath>..\Polar.DB.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

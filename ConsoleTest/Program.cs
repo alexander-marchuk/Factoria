@@ -45,10 +45,10 @@ partial class Program
                 else if (field.Name == "direct" && prop == "http://fogid.net/o/archive-item") archiveitem = field.Element("record")?.Attribute("id")?.Value;
                 else if (field.Name == "field" && prop == "http://fogid.net/o/description") description = field.Value;
 
-                if (infosource == null || archiveitem == null)
-                {
-                    Console.WriteLine($"{xel.ToString()}");
-                }
+            }
+            if (infosource == null || archiveitem == null)
+            {
+                Console.WriteLine($"{xel.ToString()}");
             }
         }
         Console.WriteLine($"Total: {n_ams} archive_member records");

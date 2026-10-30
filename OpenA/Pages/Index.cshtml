@@ -833,7 +833,9 @@
         .Cast<Rec>()
         .ToArray();
 
-        var documents = elements.Where(el => m.db.ontology.DescendantsAndSelf("http://fogid.net/o/document").Contains(el.Tp));
+        var alldocs = elements.Where(el => m.db.ontology.DescendantsAndSelf("http://fogid.net/o/document").Contains(el.Tp));
+        var documents = alldocs.Where(el => el.Tp == "http://fogid.net/o/document");
+        var multimedia = alldocs.Where(el => el.Tp != "http://fogid.net/o/document");
         var subcollections = elements.Where(el => m.db.ontology.DescendantsAndSelf("http://fogid.net/o/collection").Contains(el.Tp));
 
         // Это пролог
@@ -863,7 +865,7 @@
         <p>@description</p>
 
 
-        <p class="page-short-info">Подколлеций: @subcollections.Count()  |  Документов: @documents.Count() </p>
+        <p class="page-short-info">Подколлеций: @subcollections.Count()  |  Документов: @documents.Count() | Мультимедиа: @multimedia.Count() </p>
         <br />
 
         @* =============== Коллекции =============== *@

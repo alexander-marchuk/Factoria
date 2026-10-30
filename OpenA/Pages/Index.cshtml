@@ -977,6 +977,30 @@
                 }
             </table>
         }
+        @if (multimedia.Count() > 0)
+        {
+            <div class="heading3">
+                <h3>Коллекция содержит изображения</h3>
+            </div>
+            <ul class="coll-tree">
+                @foreach (Rec r in multimedia)
+                {
+                    string nm = r.GetText("http://fogid.net/o/name") ?? "noname";
+
+                    string uri = r.GetStr("http://fogid.net/o/uri") ?? "nouri";
+                    <div class="show-small">
+                        <a href="photo?s=medium&u=@uri" target="_external">
+                            <img src="photo?s=small&u=@uri" border="0" vspace="10" hspace="10" alt="" /><br />
+                            // <img src="GetPhoto.cshtml?s=small&u=@uri" border="0" vspace="10" hspace="10" alt="" /><br />
+                            <img src="img/icon-zoom.png" hspace="5" border="0" alt="" />
+                        </a>
+                        @nm
+                    </div>
+                }
+            </ul>
+            <br clear="all" />
+        }
+
 
     }
     else if (m.db.ontology.DescendantsAndSelf("http://fogid.net/o/geosys").Contains(tree.Tp))

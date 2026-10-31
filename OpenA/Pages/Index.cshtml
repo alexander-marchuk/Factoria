@@ -879,6 +879,7 @@
                     var ite_name_el = ite.GetText("http://fogid.net/o/name");
                     string ite_name = ite_name_el == null ? "noname" : ite_name_el;
                     //if (collection_depth == 0 && ite_name.StartsWith("Исходные материалы")) { continue; }
+                    if (ite_name.StartsWith("Исходные материалы")) { continue; } //TODO: Исходные материалы в этом интерфейсе не принимаются!!! - сомнительное решение
                     <li><a href="?id=@ite_id">@ite_name</a></li>
                 }
             </ul>

@@ -954,10 +954,8 @@
                                     sep = ",";
                                     <a href='?id=@idd'>@nm</a>
                                     ;
-                                    //                   sep = ",";                        // разделитель
                                 }
                                 sep = "";
-                                //                @sep;
                                 <span>=></span>
                                 @if (recipients != null && recipients.Length > 0)
                                     foreach (var au in recipients)
@@ -966,7 +964,6 @@
 
                                         @sep
                                         ;
-                                        //                   <span>=></span> добавил class="icon-doc"
                                         sep = ",";
                                         <a href='?id=@au.Id'>@nm</a>
                                         ;
@@ -980,21 +977,26 @@
         @if (multimedia.Count() > 0)
         {
             <div class="heading3">
-                <h3>Коллекция содержит изображения</h3>
+                <h3>Коллекция содержит изображения/видео/аудио/документы</h3>
             </div>
             <ul class="coll-tree">
                 @foreach (Rec r in multimedia)
                 {
                     string nm = r.GetText("http://fogid.net/o/name") ?? "noname";
+                    string nam = nm.Substring(0, int.Min(12, nm.Length));
 
                     string uri = r.GetStr("http://fogid.net/o/uri") ?? "nouri";
+                    string mmword = "photo";
+                    string src = "photo?s=small&u=" + uri;
+                    if (r.Tp == "http://fogid.net/o/video-doc") { src = "img/video_m.jpg"; mmword = "video"; }
+                    else if (r.Tp == "http://fogid.net/o/audio-doc") { src = "img/audio_m.jpg"; ; mmword = "audio"; }
+
                     <div class="show-small">
-                        <a href="photo?s=medium&u=@uri" target="_external">
-                            <img src="photo?s=small&u=@uri" border="0" vspace="10" hspace="10" alt="" /><br />
-                            // <img src="GetPhoto.cshtml?s=small&u=@uri" border="0" vspace="10" hspace="10" alt="" /><br />
-                            <img src="img/icon-zoom.png" hspace="5" border="0" alt="" />
+                        <a href="@(mmword)?s=medium&u=@uri" target="_external">
+                            <img src="@src" border="0" vspace="10" hspace="10" alt="@nm" />
                         </a>
-                        @nm
+                        <br />
+                        <div alt="@nm">@nam</div>
                     </div>
                 }
             </ul>

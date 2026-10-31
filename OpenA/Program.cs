@@ -66,11 +66,11 @@ app.MapGet("~/audio", (HttpRequest request, Factograph.Data.IFDataService db) =>
     string? uri = request.Query["u"].FirstOrDefault();
     if (uri == null) return Results.Empty;
     string? path = db.GetOriginalPath(uri);
-    if (string.IsNullOrEmpty(path) || !System.IO.File.Exists(path + ".mp3"))
+    if (string.IsNullOrEmpty(path) || !System.IO.File.Exists(path))
     {
         return Results.Empty;
     }
-    return Results.File(path + ".mp3", "audio/mp3");
+    return Results.File(path, "audio/mp3");
 });
 app.MapGet("~/doc", (HttpRequest request, Factograph.Data.IFDataService db) =>
 {

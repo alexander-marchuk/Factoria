@@ -10,6 +10,7 @@ public class IndexModel : PageModel
     
     public string? id { get; private set; } = null;
     public string? eid { get; set; } = null;
+    public string sm { get; set; } = "name"; // sort mode для списков документов "name" - по имени, "date" - по дате
     public Rec? tree { get; set; } = null;
     public string bas { get; set; } = "cassetterootcollection";
     public string? start_page { get; set; } = "cassetterootcollection";
@@ -41,6 +42,8 @@ public class IndexModel : PageModel
     {
         this.id = Request.Query["id"].ToString();
         this.eid = Request.Query["eid"].ToString();
+        string? sortmode = Request.Query["sm"];
+        if (sortmode != null) { this.sm = sortmode; }
         if (string.IsNullOrEmpty(this.id)) { this.id = funds_id; }
         RRecord? rr = db.GetRRecord(id, true);
         if (rr == null) return;

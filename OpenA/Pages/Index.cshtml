@@ -889,17 +889,51 @@
         @* =============== Документы =============== *@
         @if (documents.Count() > 0)
         {
+            string reload = "?id=" + m.id;
+            if (m.eid != null) reload += "&eid=" + m.eid;
+            IEnumerable<Rec> sorted_documents = Enumerable.Empty<Rec>();
+            if (m.sm == "date")
+            {
+                sorted_documents = documents.OrderBy(d => d.GetStr("http://fogid.net/o/from-date"));
+            }
+            else
+            {
+                sorted_documents = documents.OrderBy(d => d.GetText("http://fogid.net/o/name"));
+            }
+
             <div class="heading3">
                 <h3>Коллекция содержит документы</h3>
             </div>
 
             <table cellpadding="0" cellspacing="0" border="0" width="100%" class="info-docs">
                 <tr>
-                    <th width="16%"><a href="sort">Дата</a></th>
-                    <th width="60%" class="th-document-name"><a href="sort">Название документа<img src="img/ico-sort-down.gif" alt="" /></a></th>
-                    <th width="25%"><a href="sort">Автор&nbsp;&nbsp;=>&nbsp;&nbsp;Адресат</a></th>
+                    <th width="16%">
+                        @if (m.sm == "date")
+                        {
+                            <spam>Дата</spam>
+                            <img src="img/ico-sort-down.gif" alt="" />
+                        }
+                        else
+                        {
+                            reload += "&sm=date";
+                            <a href="@reload">Дата</a>                     
+                        }
+                    </th>
+                    <th width="60%" class="th-document-name">
+                        @if (m.sm == "name")
+                        {
+                            <spam>Имя</spam>
+                            <img src="img/ico-sort-down.gif" alt="" />
+                        }
+                        else
+                        {
+                            reload += "&sm=name";
+                            <a href="@reload">Имя</a>
+                        }
+                    </th>
+                    <th width="25%">Автор&nbsp;&nbsp;=>&nbsp;&nbsp;Адресат</th>
                 </tr>
-                @foreach (Rec ite in documents)
+                @foreach (Rec ite in sorted_documents)
                 {
                     var ite_name_el = ite.GetText("http://fogid.net/o/name");
                     string ite_name = ite_name_el == null ? "noname" : ite_name_el;

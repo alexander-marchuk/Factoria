@@ -33,7 +33,7 @@ app.MapRazorPages();
 app.MapGet("~/room216", (Factograph.Data.IFDataService db) =>
 {
     db.Reload();
-    return Results.Redirect("/index");
+    return Results.Redirect("~/");
 });
 
 // Выдача мультимедиа документов

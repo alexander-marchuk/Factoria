@@ -204,7 +204,35 @@ namespace Factograph.Data
             string html = sb.ToString();
             return html;
         }
-
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"\{{Id},{Tp},[");
+            bool first = true;
+            foreach (var p  in Props)
+            {
+                if (!first) { sb.Append(", "); }
+                if (p is RField)
+                {
+                    var f = (RField)p;
+                    sb.Append($"f({d.Prop},{f.Value}{(f.Lang == null?"":"^"+lang)})");
+                }
+                else if (p is RLink)
+                {
+                    var d = (RLink)p;
+                    sb.Append($"d({d.Prop},{d.Resource})");
+                }
+                else if (p is RInverseLink)
+                {
+                    var i = (RInverseLink)p;
+                    sb.Append($"i({i.Prop},{i.Source})");
+                }
+                else
+                { sb.Append(p.ToString()); }
+            }
+            sb.Append(']');
+            return sb.ToString();
+        }
     }
     public abstract class RProperty
     {

@@ -226,7 +226,7 @@
             }
             else
             {
-                await JS.InvokeVoidAsync("alert", "Can't delete record");
+                await JS.InvokeVoidAsync("alert", "Can't delete record:" + (rec != null ? rec: "null"));
             }
         }
     }

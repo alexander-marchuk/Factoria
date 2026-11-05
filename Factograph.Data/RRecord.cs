@@ -207,7 +207,7 @@ namespace Factograph.Data
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"\{{Id},{Tp},[");
+            sb.Append($"{{{Id},{Tp},[");
             bool first = true;
             foreach (var p  in Props)
             {
@@ -215,7 +215,7 @@ namespace Factograph.Data
                 if (p is RField)
                 {
                     var f = (RField)p;
-                    sb.Append($"f({d.Prop},{f.Value}{(f.Lang == null?"":"^"+lang)})");
+                    sb.Append($"f({f.Prop},{f.Value}{(f.Lang == null?"":"^"+f.Lang)})");
                 }
                 else if (p is RLink)
                 {
@@ -230,7 +230,7 @@ namespace Factograph.Data
                 else
                 { sb.Append(p.ToString()); }
             }
-            sb.Append(']');
+            sb.Append("]}");
             return sb.ToString();
         }
     }

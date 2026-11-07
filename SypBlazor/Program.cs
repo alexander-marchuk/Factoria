@@ -57,7 +57,7 @@ app.MapGet("/", (Factograph.Data.IFDataService db) =>
 });
 
 // ====== отладочный вход =======
-app.MapGet("/look/{id}", (Factograph.Data.IFDataService db, string id) =>
+app.MapGet("~/look/{id}", (Factograph.Data.IFDataService db, string id) =>
 {
     var rr = db.GetRRecord(id, true);
     string html = "<h1>Привет</h1>";

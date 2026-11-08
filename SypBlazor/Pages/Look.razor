@@ -5,13 +5,12 @@
 
 @inject Factograph.Data.IFDataService db
 
-<h1>Посмотреть</h1>
-
-@if (entityId != null)
-{
+@{
     RRecord? rr = db.GetRRecord(entityId, true);
+    string tp = rr == null ? "notype" : rr.Tp;
     if (rr != null)
     {
+        <div>Смотреть (look) id=@entityId tp=@tp</div>
         <div>
             @((MarkupString)rr.BuildPortrait(null, 2))
         </div>
@@ -23,4 +22,5 @@
     public string? entityId { get; set; }
     [Parameter] // Внешная запись
     public string? eid { get; set; }
+
 }

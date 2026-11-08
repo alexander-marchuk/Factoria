@@ -111,7 +111,7 @@ namespace Factograph.Data
                             {
                                 string idd = rec.Id;
                                 string nam = rec.GetName();
-                                cell = $"<a href='/look/{idd}'>{nam}</a>";
+                                cell = $"<a href='look/{idd}'>{nam}</a>";
                             }
                         }
                     }
@@ -180,7 +180,7 @@ namespace Factograph.Data
                                     var target = db.GetRRecord(rl.Resource, false);
                                     if (target != null)
                                     {
-                                        cells[ind] = $"<a href='/look/{target?.Id}'>{target?.GetName()}</a>";
+                                        cells[ind] = $"<a href='look/{target?.Id}'>{target?.GetName()}</a>";
                                     }
                                     else
                                     {
